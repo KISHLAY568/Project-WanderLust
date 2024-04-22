@@ -28,6 +28,8 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+const dbUrl = process.env.ATLASDB_URL;
+
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
@@ -61,7 +63,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-const dbUrl = process.env.ATLASDB_URL;
+
 
 main()
   .then(() => {
